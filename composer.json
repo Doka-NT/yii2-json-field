@@ -1,0 +1,21 @@
+{
+    "name": "skobka/yii2-json-field",
+    "description": "Help you to define fields, that can contains json. Json in this fields would be automatically serialized and deserialized",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","json","field"],
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Soshnikov Artem",
+            "email": "213036@skobka.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "skobka\\jsonfield\\": ""
+        }
+    }
+}
