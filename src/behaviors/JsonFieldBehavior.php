@@ -24,17 +24,6 @@ class JsonFieldBehavior extends Behavior
     /**
      * @inheritDoc
      */
-    public function init()
-    {
-        parent::init();
-        if ($this->dataField) {
-            throw new InvalidJsonFieldConfigException(sprintf('Property %s::dataField must be specified', static::class));
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function events()
     {
         return BaseArrayHelper::merge(parent::events(), [
@@ -69,5 +58,16 @@ class JsonFieldBehavior extends Behavior
         $value = json_decode($json);
 
         $this->owner->{$this->dataField} = $value;
+    }
+
+    /**
+     * Check object configuration
+     * @throws InvalidJsonFieldConfigException
+     */
+    private function checkConfiguration()
+    {
+        if ($this->dataField) {
+            throw new InvalidJsonFieldConfigException(sprintf('Property %s::dataField must be specified', static::class));
+        }
     }
 }
