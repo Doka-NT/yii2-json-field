@@ -6,7 +6,6 @@
 
 namespace skobka\jsonField\traits;
 
-use app\components\behaviours\JsonField\JsonFieldBehaviour;
 use skobka\jsonField\behaviors\JsonFieldBehavior;
 use skobka\jsonField\exceptions\InvalidJsonFieldConfigException;
 use yii\base\Component;
@@ -27,11 +26,12 @@ trait JsonFieldTrait
         $behavior = $this->getBehavior($name);
         if (!$behavior) {
             /** @noinspection PhpUndefinedClassInspection */
-            return parent::__get($name);
+            /** @noinspection PhpUndefinedMethodInspection */return parent::__get($name);
         }
 
         if (!$behavior instanceof JsonFieldBehavior) {
             /** @noinspection PhpUndefinedClassInspection */
+            /** @noinspection PhpUndefinedMethodInspection */
             return parent::__get($name);
         }
 
@@ -48,11 +48,13 @@ trait JsonFieldTrait
         $behavior = $this->getBehavior($name);
         if (!$behavior) {
             /** @noinspection PhpUndefinedClassInspection */
+            /** @noinspection PhpUndefinedMethodInspection */
             return parent::__set($name, $value);
         }
 
         if (!$behavior instanceof JsonFieldBehavior) {
             /** @noinspection PhpUndefinedClassInspection */
+            /** @noinspection PhpUndefinedMethodInspection */
             return parent::__set($name, $value);
         }
 
@@ -68,7 +70,7 @@ trait JsonFieldTrait
     private function checkBehaviorConfig()
     {
         if (!$this instanceof Component) {
-            $message = 'The class uses behavior ' . JsonFieldBehaviour::class . ' must be instanceof ' . Component::class;
+            $message = 'The class uses behavior ' . JsonFieldBehavior::class . ' must be instanceof ' . Component::class;
             throw new InvalidJsonFieldConfigException($message);
         }
     }
