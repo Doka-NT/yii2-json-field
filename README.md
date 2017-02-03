@@ -10,7 +10,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist skobka/yii2-json-field "*"
+php composer.phar require skobka/yii2-json-field
 ```
 
 or add
@@ -28,4 +28,34 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \skobka\jsonfield\AutoloadExample::widget(); ?>```
+
+### Product.php
+
+/**
+ * @property object|array|null $field1  
+ */
+class Product extends AvtiveRecord {
+   use JsonFieldTrait;
+   
+   public function behaviors()
+   {
+        return [
+            'field1' => [
+                'class' => JsonFieldBehavior::class,
+                'dataField' => 'json_field_1', // this is the name of field in db table
+            ],
+        ];
+   }
+}
+
+### ProductController.php
+// saving 
+$product = Product::findOne(['id' => 1]);
+
+$product->field1 = new \StdClass();
+$product->field1->foo = 'bar';
+$product->save();
+
+$product = Product::findOne(['id' => 1]);
+print $product->field1->foo; // bar
+```
