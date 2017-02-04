@@ -40,6 +40,7 @@ class JsonFieldBehavior extends Behavior
      */
     public function serializeField()
     {
+        $this->checkConfiguration();
         $value = $this->owner->{$this->dataField};
         $json = json_encode($value);
 
@@ -51,6 +52,7 @@ class JsonFieldBehavior extends Behavior
      */
     public function deserializeField()
     {
+        $this->checkConfiguration();
         $json = $this->owner->{$this->dataField};
         if (!is_string($json)) {
             return;
