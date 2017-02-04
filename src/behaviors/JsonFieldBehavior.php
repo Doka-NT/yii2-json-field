@@ -68,7 +68,7 @@ class JsonFieldBehavior extends Behavior
      */
     private function checkConfiguration()
     {
-        if ($this->dataField) {
+        if (!$this->dataField) {
             throw new InvalidJsonFieldConfigException(sprintf('Property %s::dataField must be specified', static::class));
         }
     }
